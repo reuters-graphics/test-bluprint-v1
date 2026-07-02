@@ -1,0 +1,10 @@
+{
+  "name": "test-bluprint-v1",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "description": "End-to-end test fixture for @reuters-graphics/bluprint v1. Authoring files (this package.json, tsconfig.json) are excluded from scaffolding via the config's `ignores`.",
+  "devDependencies": {
+    "@reuters-graphics/bluprint": "file:../bluprint"
+  }
+}
