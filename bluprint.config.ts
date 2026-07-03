@@ -1,6 +1,6 @@
 import {
   defineConfig,
-  run,
+  prompt,
   render,
   copy,
   move,
@@ -23,10 +23,15 @@ export default defineConfig<Context>({
   // Authoring-only files: keep them out of scaffolded projects.
   ignores: ['package.json', 'tsconfig.json', 'pnpm-lock.yaml', 'node_modules/**'],
   actions: [
-    // Supply the project name non-interactively (was a `prompt`) so this fixture
-    // can drive a fully automated end-to-end test. render + copy read it via the
-    // typed context. Swap back to a `prompt` to demo interactive input.
-    run(() => ({ projectName: 'My Project' })),
+    // Ask for the project name. In non-interactive mode (CI / `--ci`) this uses
+    // `initialValue` unless overridden by `--input`, so the same bluprint works
+    // both at a terminal and headless. render + copy read it via typed context.
+    prompt({
+      name: 'projectName',
+      type: 'text',
+      message: 'Project name?',
+      initialValue: 'My Project',
+    }),
     // render — mustache, in place.
     render({ files: ['README.md'] }),
     // copy — templated destination (slugified project name).
